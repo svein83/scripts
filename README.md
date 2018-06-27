@@ -1,13 +1,18 @@
 # websearch
 Just a script I use to add fast web-searches anywhere.
 
+Why?
+Because I missed the ability to use any search-engine simply by hitting a key-combo, typing a few words and hitting enter.
+
 ## this script currently uses:
 hURL for URL work
 
 yad for GUI interaction.
 
 ## Examples:
-[xfce4-appfinder](https://github.com/svein83/websearch/blob/master/examples.md#xfce4-appfinder)
+[google web-search from xfce4-appfinder](https://github.com/svein83/websearch/blob/master/examples.md#google)
+
+[google image-search from xfce4-appfinder that lists only svg images](https://github.com/svein83/websearch/blob/master/examples.md#vector)
 
 ## ToDo:
 
