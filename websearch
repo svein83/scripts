@@ -1,122 +1,139 @@
 #!/bin/bash
-
 engine="$1"
 shift
 terms="$*"
-query=$(hURL -s --nocolor -U "$terms")
-beginURL="https://"
-showdialog=true
-output="Engine : $engine\nNot supported!"
+bUd='https://'
+w3='www.'
+bUw="$bUd""$w3"
+retErrMsg=true
+output="Engine : $engine\nNot yet implemented!"
 
+# avoid crazyness of hURL getting confused with url-encoding a missing string. Do a search for an empty string.
+if [ -z "$terms" ]; then
+query=""
+else
+query=$(hURL -s --nocolor -U "$terms")
+fi
+
+
+if [ "$engine" == "wiki.archlinux" ];then
+	searchURL="$bU"'wiki.archlinux.org/index.php?search='"$query"
+	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
+	retErrMsg=false
+fi
 
 if [ "$engine" == "facebook.search" ];then
-	searchURL="$beginURL"'www.facebook.com/search/top/?q='"$query"
+	searchURL="$bUw"'facebook.com/search/top/?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "google.web" ];then
-	searchURL="$beginURL"'google.com/search?q='"$query"
+	searchURL="$bUd"'google.com/search?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "google.lucky" ];then
-	searchURL="$beginURL"'google.com/search?q='"$query"'&btnI'
+	searchURL="$bUd"'google.com/search?q='"$query"'&btnI'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "google.images.filetype.vector" ];then
-	searchURL="$beginURL"'google.com/search?tbs=ift:svg&tbm=isch&q='"$query"
+	searchURL="$bUd"'google.com/search?tbs=ift:svg&tbm=isch&q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "google.images" ];then
-	searchURL="$beginURL"'google.com/search?tbm=isch&q='"$query"
+	searchURL="$bUd"'google.com/search?tbm=isch&q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "duckduckgo.web" ];then
-	searchURL="$beginURL"'duckduckgo.com/?q='"$query"
+	searchURL="$bUd"'duckduckgo.com/?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "bing.web" ];then
-	searchURL="$beginURL"'bing.com/search?q='"$query"
+	searchURL="$bUd"'bing.com/search?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "bing.images" ];then
-	searchURL="$beginURL"'bing.com/images/search?q='"$query"
+	searchURL="$bUd"'bing.com/images/search?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "bing.videos" ];then
-	searchURL="$beginURL"'bing.com/videos/search?q='"$query"
+	searchURL="$bUd"'bing.com/videos/search?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "youtube.search" ];then
-	searchURL="$beginURL"'youtube.com/results?search_query='"$query"
+	searchURL="$bUd"'youtube.com/results?search_query='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "imdb.all" ];then
-	searchURL="$beginURL"'imdb.com/find?q='"$query"'&s=all'
+	searchURL="$bUd"'imdb.com/find?q='"$query"'&s=all'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "imdb.title" ];then
 # Media titles
-	searchURL="$beginURL"'imdb.com/find?q='"$query"'&s=tt'
+	searchURL="$bUd"'imdb.com/find?q='"$query"'&s=tt'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "imdb.episode" ];then
-	searchURL="$beginURL"'imdb.com/find?q='"$query"'&s=ep'
+	searchURL="$bUd"'imdb.com/find?q='"$query"'&s=ep'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "imdb.name" ];then
 # Actors, directors etc.
-	searchURL="$beginURL"'imdb.com/find?q='"$query"'&s=nm'
+	searchURL="$bUd"'imdb.com/find?q='"$query"'&s=nm'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "imdb.company" ];then
-	searchURL="$beginURL"'imdb.com/find?q='"$query"'&s=co'
+	searchURL="$bUd"'imdb.com/find?q='"$query"'&s=co'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "imdb.keywords" ];then
-	searchURL="$beginURL"'imdb.com/find?q='"$query"'&s=kw'
+	searchURL="$bUd"'imdb.com/find?q='"$query"'&s=kw'
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 if [ "$engine" == "thetvdb.search" ];then
-	searchURL="$beginURL"'www.thetvdb.com/search?q='"$query"
+	searchURL="$bUw"'thetvdb.com/search?q='"$query"
 	exo-open --launch WebBrowser>/dev/null 2>&1 $searchURL
-	showdialog=false
+	retErrMsg=false
 fi
 
 
-if [ "$showdialog" == true ]; then
-	yad --text="$output"
-	exit 1
+if [ "$retErrMsg" == true ]; then
+  if [ -t 1 ] ; then
+    echo -e '\n'"$output"'\n'
+  else
+    yad --text="$output"
+  fi
+  exit 1
 fi
 
 exit 0
