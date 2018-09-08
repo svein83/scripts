@@ -1,4 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+if [ "$EUID" -ne 0 ]
+then
+  cd ~
+  echo -e "\nNot root. Will install to home directory."
+else
+  echo -e "\nRunning as root. Will install to /usr/local/bin"
+fi
 
 EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -14,4 +21,14 @@ fi
 php composer-setup.php --quiet
 RESULT=$?
 rm composer-setup.php
+
+if [ "$RESULT" = "0" ]; then
+  if [ "$EUID" -ne 0 ]; then
+    echo "Execute: php ~/composer.phar [args]"
+  else
+    mv 'composer.phar' '/usr/local/bin/composer'
+    echo "Execute composer [args]"
+  fi
+fi
+
 exit $RESULT
